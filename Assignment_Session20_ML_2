@@ -1,0 +1,60 @@
+Build the linear regression model using scikit learn in boston data to predict 'Price' based on other dependent variable.
+
+Here is the code to load the data
+
+import numpy as np
+import pandas as pd
+import scipy.stats as stats
+import matplotlib.pyplot as plt
+import sklearn
+from sklearn.datasets import load_boston
+boston = load_boston()
+bos = pd.DataFrame(boston.data)
+
+Solution:
+
+%matplotlib inline
+import numpy as np
+import pandas as pd
+import scipy.stats as stats
+import matplotlib.pyplot as plt
+import sklearn
+
+from sklearn.datasets import load_boston
+boston = load_boston()
+
+#Exploring the keys of boston dictionary
+boston.keys()
+
+#Feature Names of boston data set
+boston.data.shape
+
+print(boston.feature_names)
+
+#Descriptions of boston data set
+print(boston.DESCR)
+
+#Converting boston data into pandas data frame
+bos = pd.DataFrame(boston.data)
+bos.head()
+
+#Replacing column names which are in numbers into feature names
+
+bos.columns = boston.feature_names
+bos.head()
+
+bos['PRICE'] = boston.target
+
+#Introducing linear regression model
+
+from sklearn.linear_model import LinearRegression
+X = bos.drop('PRICE', axis = 1)
+y = bos.PRICE
+lm = LinearRegression()
+lm.fit(X,y)
+
+#Printing intercept and number of coefficients
+
+print('Estimated intercept coefficient: ', lm.intercept_)
+
+print('Number of coefficients ', len(lm.coef_))
